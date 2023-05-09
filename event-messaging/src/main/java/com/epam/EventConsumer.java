@@ -18,8 +18,11 @@ public class EventConsumer {
     }
 
     @KafkaListener(topics = "create-event-request", groupId = "groupId")
-    public void createEvent(Event event) {
-        System.out.println(event.getEventType());
+    public void createEvent(List<Event> events) {
+        for (Event event : events) {
+            System.out.println(event.getEventType());
+
+        }
 //            eventService.createEvent(event);
     }
 

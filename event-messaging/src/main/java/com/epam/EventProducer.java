@@ -15,6 +15,7 @@ public class EventProducer implements EventMessaging {
 
     @Override
     public void createEvent(Event event) {
+        System.out.println("send message");
         kafkaTemplate.send("create-event-request", event);
     }
 
