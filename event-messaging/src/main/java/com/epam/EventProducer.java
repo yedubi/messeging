@@ -2,19 +2,16 @@ package com.epam;
 
 import com.epam.dtos.Event;
 import com.epam.services.EventMessaging;
-import org.springframework.context.annotation.Profile;
+import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-@Profile("kafka")
+@Service
+@RequiredArgsConstructor
+//@Profile("kafka")
 public class EventProducer implements EventMessaging {
 
     private final KafkaTemplate<String, Event> kafkaTemplate;
-
-    public EventProducer(KafkaTemplate<String, Event> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
 
     @Override
     public void createEvent(Event event) {

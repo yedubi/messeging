@@ -9,30 +9,28 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@Profile("kafka")
+//@Profile("kafka")
 public class EventConsumer {
-
     private final EventService eventService;
 
     public EventConsumer(EventService eventService) {
         this.eventService = eventService;
     }
 
-    @KafkaListener(topics = "create-event-request")
-    public void createEvent(List<Event> events) {
-        for (Event event : events) {
-            eventService.createEvent(event);
-        }
+    @KafkaListener(topics = "create-event-request", groupId = "groupId")
+    public void createEvent(Event event) {
+        System.out.println(event.getEventType());
+//            eventService.createEvent(event);
     }
 
-    @KafkaListener(topics = "update-event-request")
+    @KafkaListener(topics = "update-event-request", groupId = "groupId")
     public void updateEvent(List<Event> events) {
         for (Event event : events) {
             eventService.updateEvent(event.getId(), event);
         }
     }
 
-    @KafkaListener(topics = "delete-event-request")
+    @KafkaListener(topics = "delete-event-request", groupId = "groupId")
     public void deleteEvent(List<Long> eventIds) {
         for (Long eventId : eventIds) {
             eventService.deleteEvent(eventId);

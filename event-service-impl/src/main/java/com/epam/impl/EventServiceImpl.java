@@ -6,6 +6,7 @@ import com.epam.services.EventMessaging;
 import com.epam.services.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +29,7 @@ public class EventServiceImpl implements EventService {
     @SneakyThrows
     @Override
     public Event updateEvent(Long id, Event event) {
-        //eventMessaging.updateEvent(event);
-
+        eventMessaging.updateEvent(event);
         Optional<Event> existingEvent = eventRepository.findById(String.valueOf(id));
         if (existingEvent.isPresent()) {
             Event updatedEvent = existingEvent.get();
@@ -54,7 +54,7 @@ public class EventServiceImpl implements EventService {
     @SneakyThrows
     @Override
     public void deleteEvent(Long id) {
-        //eventMessaging.deleteEvent(id);
+        eventMessaging.deleteEvent(id);
         Optional<Event> event = eventRepository.findById(String.valueOf(id));
         if (event.isPresent()) {
             eventRepository.deleteById(String.valueOf(id));
