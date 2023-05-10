@@ -1,13 +1,13 @@
-package com.epam.rabbitmq;
+package com.epam.activemq;
 
 import com.epam.dtos.Event;
 import com.epam.services.EventService;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.context.annotation.Profile;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile("rabbit")
+@Profile("activemq")
 public class EventConsumer {
 
     private final EventService eventService;
@@ -16,18 +16,17 @@ public class EventConsumer {
         this.eventService = eventService;
     }
 
-    @RabbitListener(queues = "create-event-request")
+    @JmsListener(destination = "create-event-request")
     public void createEvent(Event event) {
-        System.out.println("create-event-request");
         eventService.createEvent(event);
     }
 
-    @RabbitListener(queues = "update-event-request")
+    @JmsListener(destination = "update-event-request")
     public void updateEvent(Event event) {
         eventService.updateEvent(event.getId(), event);
     }
 
-    @RabbitListener(queues = "delete-event-request")
+    @JmsListener(destination = "delete-event-request")
     public void deleteEvent(Event event) {
         eventService.deleteEvent(event.getId());
     }

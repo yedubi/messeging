@@ -31,9 +31,9 @@ public class Event {
     @Field(type = FieldType.Text, name = "event_type")
     private EventType eventType;
 
-    @Field(type = FieldType.Date, name = "date_time")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate dateTime;
+//    @Field(type = FieldType.Date, name = "date_time")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+//    private LocalDate dateTime;
 
     public enum EventType {
         WORKSHOP,

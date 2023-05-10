@@ -7,7 +7,7 @@ springdoc:
 
 spring:
   profiles:
-    active: kafka
+    active: activemq
   kafka:
     bootstrap-servers: localhost:9092
   rabbitmq:
@@ -15,3 +15,7 @@ spring:
     port: 5672
     username: guest
     password: guest
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin

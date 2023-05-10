@@ -42,7 +42,7 @@ public class EventServiceImpl implements EventService {
             updatedEvent.setPlace(event.getPlace());
             updatedEvent.setSpeaker(event.getSpeaker());
             updatedEvent.setEventType(event.getEventType());
-            updatedEvent.setDateTime(event.getDateTime());
+//            updatedEvent.setDateTime(event.getDateTime());
             return eventRepository.save(updatedEvent);
         } else {
             throw new EventNotFoundException();
