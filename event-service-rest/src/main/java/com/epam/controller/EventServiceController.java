@@ -1,6 +1,7 @@
 package com.epam.controller;
 
 import com.epam.dtos.Event;
+import com.epam.impl.EventSearchServiceImpl;
 import com.epam.services.EventService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,11 @@ public class EventServiceController {
 
     private final EventService eventService;
 
-    public EventServiceController(EventService eventService) {
+    private final EventSearchServiceImpl eventSearchService;
+
+    public EventServiceController(EventService eventService, EventSearchServiceImpl eventSearchService) {
         this.eventService = eventService;
+        this.eventSearchService = eventSearchService;
     }
 
     @PostMapping
@@ -29,6 +33,16 @@ public class EventServiceController {
         Event event = eventService.getEvent(id);
         if (event != null) {
             return ResponseEntity.ok(event);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<Event>> getEventByName(@PathVariable String name) {
+        List<Event> events = eventSearchService.getEvent(name);
+        if (!events.isEmpty()) {
+            return ResponseEntity.ok(events);
         } else {
             return ResponseEntity.notFound().build();
         }

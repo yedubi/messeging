@@ -6,13 +6,18 @@ import com.epam.services.EventMessaging;
 import com.epam.services.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.multiMatchQuery;
 
 @Service
 @RequiredArgsConstructor

@@ -17,21 +17,21 @@ public class EventConsumer {
         this.eventService = eventService;
     }
 
-    @KafkaListener(topics = "${spring.kafka.create-event-request}", groupId = "${spring.kafka.group}")
+    @KafkaListener(topics = "create-event-request", groupId = "groupId")
     public void createEvent(List<Event> events) {
         for (Event event : events) {
             eventService.createEvent(event);
         }
     }
 
-    @KafkaListener(topics = "${spring.kafka.update-event-request}", groupId = "${spring.kafka.group}")
+    @KafkaListener(topics = "update-event-request", groupId = "groupId")
     public void updateEvent(List<Event> events) {
         for (Event event : events) {
             eventService.updateEvent(event.getId(), event);
         }
     }
 
-    @KafkaListener(topics = "${spring.kafka.delete-event-request}", groupId = "${spring.kafka.group}")
+    @KafkaListener(topics = "delete-event-request", groupId = "groupId")
     public void deleteEvent(List<Long> eventIds) {
         for (Long eventId : eventIds) {
             eventService.deleteEvent(eventId);
