@@ -54,9 +54,9 @@ public class EventServiceImpl implements EventService {
     @SneakyThrows
     @Override
     public void deleteEvent(Long id) {
-        eventMessaging.deleteEvent(id);
         Optional<Event> event = eventRepository.findById(String.valueOf(id));
         if (event.isPresent()) {
+            eventMessaging.deleteEvent(event.get());
             eventRepository.deleteById(String.valueOf(id));
         } else {
             throw new EventNotFoundException();

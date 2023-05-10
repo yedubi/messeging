@@ -1,7 +1,7 @@
-package com.epam.configuration;
+package com.epam.kafka.configuration;
 
 import com.epam.dtos.Event;
-import com.epam.serializers.EventSerializer;
+import com.epam.kafka.serializers.EventSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

@@ -6,5 +6,18 @@ springdoc:
     url: /open-api.yaml
 
 spring:
+  profiles:
+    active: kafka
   kafka:
     bootstrap-servers: localhost:9092
+    create-event-request: create-event-request,
+    update-event-request: update-event-request,
+    delete-event-request: delete-event-request,
+    create-event-notification: create-event-notification,
+    update-event-notification: update-event-notification,
+    delete-event-notification: delete-event-notification,
+    group: groupId
+
+
+queue:
+  name=teste:

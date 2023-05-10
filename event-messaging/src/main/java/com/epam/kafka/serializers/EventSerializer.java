@@ -1,4 +1,4 @@
-package com.epam.serializers;
+package com.epam.kafka.serializers;
 
 import com.epam.dtos.Event;
 import com.fasterxml.jackson.databind.ObjectMapper;

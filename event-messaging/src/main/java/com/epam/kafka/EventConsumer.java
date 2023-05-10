@@ -1,4 +1,4 @@
-package com.epam;
+package com.epam.kafka;
 
 import com.epam.dtos.Event;
 import com.epam.services.EventService;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-//@Profile("kafka")
+@Profile("kafka")
 public class EventConsumer {
     private final EventService eventService;
 
@@ -17,23 +17,21 @@ public class EventConsumer {
         this.eventService = eventService;
     }
 
-    @KafkaListener(topics = "create-event-request", groupId = "groupId")
+    @KafkaListener(topics = "${spring.kafka.create-event-request}", groupId = "${spring.kafka.group}")
     public void createEvent(List<Event> events) {
         for (Event event : events) {
-            System.out.println(event.getEventType());
-
+            eventService.createEvent(event);
         }
-//            eventService.createEvent(event);
     }
 
-    @KafkaListener(topics = "update-event-request", groupId = "groupId")
+    @KafkaListener(topics = "${spring.kafka.update-event-request}", groupId = "${spring.kafka.group}")
     public void updateEvent(List<Event> events) {
         for (Event event : events) {
             eventService.updateEvent(event.getId(), event);
         }
     }
 
-    @KafkaListener(topics = "delete-event-request", groupId = "groupId")
+    @KafkaListener(topics = "${spring.kafka.delete-event-request}", groupId = "${spring.kafka.group}")
     public void deleteEvent(List<Long> eventIds) {
         for (Long eventId : eventIds) {
             eventService.deleteEvent(eventId);
